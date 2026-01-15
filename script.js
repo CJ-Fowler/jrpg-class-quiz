@@ -186,9 +186,11 @@ function showQuestion() {
     const btnContainer = document.getElementById('answer-buttons');
     btnContainer.innerHTML = '';
     
+    // Manage Back Button Visibility
     const backBtn = document.getElementById('back-btn');
     backBtn.style.display = (currentQuestionIndex === 0) ? 'none' : 'inline-block';
 
+    // Update Progress
     document.getElementById('progress-bar').style.width = `${(currentQuestionIndex / questions.length) * 100}%`;
 
     getWeightedAnswers(q).forEach(ans => {
@@ -220,6 +222,8 @@ function showResult() {
     document.getElementById('quiz-screen').classList.replace('active', 'hidden');
     document.getElementById('result-screen').classList.replace('hidden', 'active');
     document.getElementById('progress-bar').style.width = '100%';
+
+    // Reset Adventure Log view state
     document.getElementById('adventure-log-section').classList.add('hidden');
     document.getElementById('log-toggle-btn').innerText = "View Adventure Log";
 
@@ -228,9 +232,10 @@ function showResult() {
     const hybridName = jobMatrix[primary][secondary];
 
     document.getElementById('result-title').innerText = `${primary} / ${secondary}`;
-    document.getElementById('result-hybrid-text').innerText = `This is often called a ${hybridName}.`;
+    document.getElementById('result-hybrid-text').innerText = `You are a ${hybridName}`;
     document.getElementById('result-desc').innerText = descriptions[primary];
 
+    // Render Stats
     const stats = document.getElementById('result-stats');
     stats.innerHTML = '';
     sorted.forEach(([type, score]) => {
@@ -242,15 +247,24 @@ function showResult() {
             </div>`;
     });
 
+    // Render Adventure Log content
     const reviewList = document.getElementById('review-list');
     reviewList.innerHTML = '';
     userChoices.forEach(choice => {
         reviewList.innerHTML += `
             <div class="review-item">
                 <div class="review-q">${choice.q}</div>
-                <div class="review-a"><span>${choice.a}</span><span class="class-tag">${choice.type}</span></div>
+                <div class="review-a">
+                    <span>${choice.a}</span>
+                    <span class="class-tag">${choice.type}</span>
+                </div>
             </div>`;
     });
+
+    // Reset Share Button
+    const shareBtn = document.getElementById('share-btn');
+    shareBtn.innerText = "Share Results";
+    shareBtn.classList.remove('copied');
 }
 
 function toggleLog() {
@@ -264,13 +278,16 @@ function shareResults() {
     const sorted = Object.entries(scores).sort((a,b) => b[1] - a[1]);
     const primary = sorted[0][0], secondary = sorted[1][0];
     const hybridName = jobMatrix[primary][secondary];
-    let shareText = `⚔️ My RPG Job: ${hybridName} (${primary}/${secondary})\n\n📊 Spectrum:\n`;
-    sorted.forEach(([type, score]) => shareText += `${type}: ${Math.round((score/questions.length)*100)}%\n`);
-    shareText += `\nTest yourself: ${window.location.href}`;
+    
+    let shareText = `⚔️ My RPG Job: ${hybridName} (${primary}/${secondary})\n\n📊 My Class Spectrum:\n`;
+    sorted.forEach(([type, score]) => {
+        shareText += `${type}: ${Math.round((score/questions.length)*100)}%\n`;
+    });
+    shareText += `\nTest yourself at: ${window.location.href}`;
 
     navigator.clipboard.writeText(shareText).then(() => {
         const btn = document.getElementById('share-btn');
-        btn.innerText = "Copied!";
+        btn.innerText = "Copied to Clipboard!";
         btn.classList.add('copied');
     });
 }
