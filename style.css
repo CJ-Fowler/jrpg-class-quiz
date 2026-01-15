@@ -1,8 +1,8 @@
 :root {
     --bg-dark: #0a0a0c;
-    --card-bg: rgba(20, 20, 25, 0.88); /* Semi-transparent for background visibility */
-    --accent-purple: #a855f7;         /* Matches the portals */
-    --accent-blue: #3b82f6;           /* Matches the glowing paths */
+    --card-bg: rgba(20, 20, 25, 0.88); 
+    --accent-purple: #a855f7;         
+    --accent-blue: #3b82f6;           
     --text-primary: #f3f4f6;
     --text-dim: #9ca3af;
     --border-glow: rgba(168, 85, 247, 0.4);
@@ -18,13 +18,13 @@ body {
     font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     color: var(--text-primary);
     
-    /* Background Image Setup */
-    background-image: url('background.jpg');
+    /* Background Image Setup - Updated to background.png */
+    background-color: var(--bg-dark); /* Fallback color */
+    background-image: url('background.png'); 
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
     background-repeat: no-repeat;
-    background-color: var(--bg-dark);
 }
 
 /* --- CRT Scanline Effect --- */
@@ -36,7 +36,6 @@ body::before {
     left: 0;
     bottom: 0;
     right: 0;
-    /* Creates the horizontal line and slight RGB flicker effect */
     background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%), 
                 linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
     z-index: 9999;
@@ -53,7 +52,7 @@ body::before {
     border-radius: 20px;
     border: 1px solid var(--border-glow);
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(8px); /* Blurs the background art slightly for readability */
+    backdrop-filter: blur(8px); 
     margin: auto;
 }
 
