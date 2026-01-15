@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JRPG Class Aptitude Test</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <header>
+            <h1>Class Aptitude Test</h1>
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+        </header>
+
+        <div id="start-screen" class="screen active">
+            <p>13 Questions to determine your starting character and eventual destiny.</p>
+            <button class="btn start-btn" onclick="startQuiz()">Begin Quiz</button>
+        </div>
+
+        <div id="quiz-screen" class="screen hidden">
+            <h2 id="question-text">Question goes here...</h2>
+            <div id="answer-buttons" class="btn-grid"></div>
+        </div>
+
+        <div id="result-screen" class="screen hidden">
+            <h2>Your Aptitude Spectrum:</h2>
+            <h1 id="result-title" class="result-title">Primary / Secondary</h1>
+            <p id="result-hybrid-text" class="hybrid-callout"></p>
+            <p id="result-desc"></p>
+            
+            <div id="result-stats" class="stats-container"></div>
+
+            <div class="review-section">
+                <h3>Adventure Log (Your Choices)</h3>
+                <div id="review-list"></div>
+            </div>
+
+            <button class="btn" style="text-align:center" onclick="restartQuiz()">Re-Roll Character</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
