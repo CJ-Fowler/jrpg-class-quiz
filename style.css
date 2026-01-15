@@ -61,6 +61,23 @@ body {
     border-radius: 6px;
     text-align: left;
 }
+.share-btn {
+    background-color: #2a2a2a;
+    border: 1px solid #00ffcc;
+    color: #00ffcc;
+    margin-top: 10px;
+}
+
+.share-btn:hover {
+    background-color: #00ffcc;
+    color: #000;
+}
+
+.share-btn.copied {
+    background-color: #008866;
+    border-color: #008866;
+    color: #fff;
+}
 
 .btn:hover { background-color: var(--btn-hover); transform: translateY(-2px); }
 

@@ -24,6 +24,7 @@
         <div id="quiz-screen" class="screen hidden">
             <h2 id="question-text">Question goes here...</h2>
             <div id="answer-buttons" class="btn-grid"></div>
+            <button id="back-btn" class="btn back-btn" onclick="goBack()" style="margin-top: 20px; border-color: #666;">← Go Back</button>
         </div>
 
         <div id="result-screen" class="screen hidden">
@@ -38,7 +39,10 @@
                 <h3>Adventure Log (Your Choices)</h3>
                 <div id="review-list"></div>
             </div>
-
+            <div class="result-actions">
+                 <button class="btn" onclick="restartQuiz()">Restart Adventure</button>
+                <button id="share-btn" class="btn share-btn" onclick="shareResults()">Share Results</button>
+            </div>
             <button class="btn" style="text-align:center" onclick="restartQuiz()">Re-Roll Character</button>
         </div>
     </div>

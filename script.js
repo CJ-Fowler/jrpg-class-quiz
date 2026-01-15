@@ -7,49 +7,21 @@ const descriptions = {
     [SHAMAN]: "You walk between worlds, drawing power from spirits and nature."
 };
 
-/**
- * JOB MATRIX
- * Scout/Sorcerer: Hexblade
- * Sorcerer/Scout: Ninja
- * Shaman/Soldier: Sentinel
- * Shaman/Scout: Harbinger
- * Scout/Shaman: Outrider
- */
 const jobMatrix = {
-    [SOLDIER]: { 
-        [SOLDIER]: "Vanguard", 
-        [SCOUT]: "Slayer", 
-        [SORCERER]: "Battlemage", 
-        [SHAMAN]: "Paladin" 
-    },
-    [SCOUT]: { 
-        [SCOUT]: "Assassin", 
-        [SOLDIER]: "Duelist", 
-        [SORCERER]: "Hexblade", 
-        [SHAMAN]: "Outrider" 
-    },
-    [SORCERER]: { 
-        [SORCERER]: "Archmage", 
-        [SOLDIER]: "Battlemage", 
-        [SCOUT]: "Ninja", 
-        [SHAMAN]: "Summoner"
-    },
-    [SHAMAN]: { 
-        [SHAMAN]: "Elder", 
-        [SOLDIER]: "Sentinel", 
-        [SCOUT]: "Harbinger", 
-        [SORCERER]: "Druid"
-    }
+    [SOLDIER]: { [SOLDIER]: "Vanguard", [SCOUT]: "Slayer", [SORCERER]: "Battlemage", [SHAMAN]: "Paladin" },
+    [SCOUT]: { [SCOUT]: "Assassin", [SOLDIER]: "Duelist", [SORCERER]: "Hexblade", [SHAMAN]: "Outrider" },
+    [SORCERER]: { [SORCERER]: "Archmage", [SOLDIER]: "Battlemage", [SCOUT]: "Ninja", [SHAMAN]: "Summoner" },
+    [SHAMAN]: { [SHAMAN]: "Elder", [SOLDIER]: "Sentinel", [SCOUT]: "Harbinger", [SORCERER]: "Druid" }
 };
 
 const questions = [
     {
         text: "How do you typically engage an obstacle?",
         answerPool: [
-            {text: "Smash through it.", type: SOLDIER}, {text: "Overpower it.", type: SOLDIER}, {text: "Challenge it directly.", type: SOLDIER},
-            {text: "Find a way around it.", type: SCOUT}, {text: "Navigate it with agility.", type: SCOUT}, {text: "Slip through the gaps.", type: SCOUT},
-            {text: "Apply logic to solve it.", type: SORCERER}, {text: "Use a spell to bypass it.", type: SORCERER}, {text: "Analyze its weak points.", type: SORCERER},
-            {text: "Ask for help or guidance.", type: SHAMAN}, {text: "Sewarch for a natural opening.", type: SHAMAN}, {text: "Listen to your intuition.", type: SHAMAN}
+            {text: "Smash through it.", type: SOLDIER}, {text: "Overpower it with grit.", type: SOLDIER}, {text: "Challenge it directly.", type: SOLDIER},
+            {text: "Find a way around it.", type: SCOUT}, {text: "Navigate it with speed.", type: SCOUT}, {text: "Slip through the gaps.", type: SCOUT},
+            {text: "Apply logic to solve it.", type: SORCERER}, {text: "Use a tool to bypass it.", type: SORCERER}, {text: "Analyze its weak points.", type: SORCERER},
+            {text: "Ask for help or guidance.", type: SHAMAN}, {text: "Wait for a natural opening.", type: SHAMAN}, {text: "Listen to your intuition.", type: SHAMAN}
         ],
         weights: { [SOLDIER]: 1, [SCOUT]: 1, [SORCERER]: 1, [SHAMAN]: 1 }
     },
@@ -58,7 +30,7 @@ const questions = [
         answerPool: [
             {text: "The thick of the fray.", type: SOLDIER}, {text: "A structured fortress.", type: SOLDIER}, {text: "The training grounds.", type: SOLDIER},
             {text: "The high rooftops.", type: SCOUT}, {text: "A hidden vantage point.", type: SCOUT}, {text: "Dark, narrow alleys.", type: SCOUT},
-            {text: "A quiet study room.", type: SORCERER}, {text: "A laboratory.", type: SORCERER}, {text: "A library.", type: SORCERER},
+            {text: "A quiet study room.", type: SORCERER}, {text: "A laboratory of ideas.", type: SORCERER}, {text: "A geometric library.", type: SORCERER},
             {text: "A moonlit forest.", type: SHAMAN}, {text: "An ancient shrine.", type: SHAMAN}, {text: "The open wilderness.", type: SHAMAN}
         ],
         weights: { [SOLDIER]: 1, [SCOUT]: 1, [SORCERER]: 1, [SHAMAN]: 1 }
@@ -67,7 +39,7 @@ const questions = [
         text: "How do you want to be remembered?",
         answerPool: [
             {text: "As a hero of legend.", type: SOLDIER}, {text: "As a protector of many.", type: SOLDIER}, {text: "As a symbol of power.", type: SOLDIER},
-            {text: "As a ghost in the wind.", type: SCOUT}, {text: "As an evasive shadow.", type: SCOUT}, {text: "As a legendary assassin.", type: SCOUT},
+            {text: "As a ghost in the wind.", type: SCOUT}, {text: "As a survivor of all.", type: SCOUT}, {text: "As a silent legend.", type: SCOUT},
             {text: "As a master of truth.", type: SORCERER}, {text: "As a seeker of hidden laws.", type: SORCERER}, {text: "As a peerless mind.", type: SORCERER},
             {text: "As a soul of kindness.", type: SHAMAN}, {text: "As a keeper of balance.", type: SHAMAN}, {text: "As a guiding spirit.", type: SHAMAN}
         ],
@@ -88,17 +60,17 @@ const questions = [
         answerPool: [
             {text: "Forged plate armor.", type: SOLDIER}, {text: "A heavy claymore.", type: SOLDIER}, {text: "A banner of honor.", type: SOLDIER},
             {text: "A cloak of invisibility.", type: SCOUT}, {text: "Boots of haste.", type: SCOUT}, {text: "A map of secrets.", type: SCOUT},
-            {text: "A magical focus.", type: SORCERER}, {text: "An infinite inkwell.", type: SORCERER}, {text: "A ring of mental clarity.", type: SORCERER},
-            {text: "A bag of healing herbs.", type: SHAMAN}, {text: "A spirit board.", type: SHAMAN}, {text: "A seed of a world-tree.", type: SHAMAN}
+            {text: "A crystal of focus.", type: SORCERER}, {text: "An infinite inkwell.", type: SORCERER}, {text: "A ring of mental clarity.", type: SORCERER},
+            {text: "A bag of healing herbs.", type: SHAMAN}, {text: "A whistle for spirits.", type: SHAMAN}, {text: "A seed of a world-tree.", type: SHAMAN}
         ],
         weights: { [SOLDIER]: 1, [SCOUT]: 1, [SORCERER]: 1, [SHAMAN]: 1 }
     },
     {
         text: "What is your ideal weapon style?",
         answerPool: [
-            {text: "Slow, heavy, and crushing.", type: SOLDIER}, {text: "Balanced and defensive.", type: SOLDIER}, {text: "Unstoppable and aggressive.", type: SOLDIER},
+            {text: "Slow, heavy, and crushing.", type: SOLDIER}, {text: "Balanced and defensive.", type: SOLDIER}, {text: "Unstoppable and loud.", type: SOLDIER},
             {text: "Fast, light, and jagged.", type: SCOUT}, {text: "Ranged and silent.", type: SCOUT}, {text: "Hidden and lethal.", type: SCOUT},
-            {text: "Magical and mysterious.", type: SORCERER}, {text: "Complex and esoteric.", type: SORCERER}, {text: "Loud and flashy.", type: SORCERER},
+            {text: "Complex and technical.", type: SORCERER}, {text: "Ethereal and mental.", type: SORCERER}, {text: "Unseen and tactical.", type: SORCERER},
             {text: "Organic and symbolic.", type: SHAMAN}, {text: "Fluid and rhythmic.", type: SHAMAN}, {text: "Ancient and mystical.", type: SHAMAN}
         ],
         weights: { [SOLDIER]: 1, [SCOUT]: 1, [SORCERER]: 1, [SHAMAN]: 1 }
@@ -107,8 +79,8 @@ const questions = [
         text: "How do you handle intense pressure?",
         answerPool: [
             {text: "Tighten your grip.", type: SOLDIER}, {text: "Push back harder.", type: SOLDIER}, {text: "Dig in your heels.", type: SOLDIER},
-            {text: "Find a distraction as needed.", type: SCOUT}, {text: "Move with the flow.", type: SCOUT}, {text: "Disappear into the work.", type: SCOUT},
-            {text: "Break it into data points.", type: SORCERER}, {text: "Reevaluate the process.", type: SORCERER}, {text: "Stay perfectly logical.", type: SORCERER},
+            {text: "Maintain your focus.", type: SCOUT}, {text: "Move with the flow.", type: SCOUT}, {text: "Disappear into the work.", type: SCOUT},
+            {text: "Break it into data points.", type: SORCERER}, {text: "Rethink the system.", type: SORCERER}, {text: "Stay perfectly logical.", type: SORCERER},
             {text: "Breathe and meditate.", type: SHAMAN}, {text: "Connect with others.", type: SHAMAN}, {text: "Release it to the wind.", type: SHAMAN}
         ],
         weights: { [SOLDIER]: 1, [SCOUT]: 1, [SORCERER]: 1, [SHAMAN]: 1 }
@@ -201,10 +173,7 @@ function startQuiz() {
     currentQuestionIndex = 0;
     scores = { [SCOUT]: 0, [SOLDIER]: 0, [SORCERER]: 0, [SHAMAN]: 0 };
     userChoices = [];
-    
-    // Randomize the order of the questions themselves
     shuffle(questions); 
-
     document.getElementById('start-screen').classList.replace('active', 'hidden');
     document.getElementById('result-screen').classList.replace('active', 'hidden');
     document.getElementById('quiz-screen').classList.replace('hidden', 'active');
@@ -217,6 +186,13 @@ function showQuestion() {
     const btnContainer = document.getElementById('answer-buttons');
     btnContainer.innerHTML = '';
     
+    const backBtn = document.getElementById('back-btn');
+    if (currentQuestionIndex === 0) {
+        backBtn.style.display = 'none';
+    } else {
+        backBtn.style.display = 'inline-block';
+    }
+
     document.getElementById('progress-bar').style.width = `${(currentQuestionIndex / questions.length) * 100}%`;
 
     getWeightedAnswers(q).forEach(ans => {
@@ -231,6 +207,17 @@ function showQuestion() {
         };
         btnContainer.appendChild(btn);
     });
+}
+
+function goBack() {
+    if (currentQuestionIndex > 0) {
+        if (confirm("Go back and change your previous answer?")) {
+            const lastChoice = userChoices.pop();
+            scores[lastChoice.type]--;
+            currentQuestionIndex--;
+            showQuestion();
+        }
+    }
 }
 
 function showResult() {
@@ -269,6 +256,33 @@ function showResult() {
                 </div>
             </div>
         `;
+    });
+
+    // Reset share button text
+    const shareBtn = document.getElementById('share-btn');
+    shareBtn.innerText = "Share Results";
+    shareBtn.classList.remove('copied');
+}
+
+function shareResults() {
+    const sorted = Object.entries(scores).sort((a,b) => b[1] - a[1]);
+    const primary = sorted[0][0], secondary = sorted[1][0];
+    const hybridName = jobMatrix[primary][secondary];
+    
+    let shareText = `⚔️ My RPG Job Analysis: ${hybridName} (${primary}/${secondary})\n\n`;
+    shareText += `📊 My Class Spectrum:\n`;
+    
+    sorted.forEach(([type, score]) => {
+        const pct = Math.round((score / questions.length) * 100);
+        shareText += `${type}: ${pct}%\n`;
+    });
+    
+    shareText += `\nDiscover your class at: ${window.location.href}`;
+
+    navigator.clipboard.writeText(shareText).then(() => {
+        const shareBtn = document.getElementById('share-btn');
+        shareBtn.innerText = "Copied to Clipboard!";
+        shareBtn.classList.add('copied');
     });
 }
 
