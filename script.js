@@ -186,11 +186,9 @@ function showQuestion() {
     const btnContainer = document.getElementById('answer-buttons');
     btnContainer.innerHTML = '';
     
-    // Manage Back Button Visibility
     const backBtn = document.getElementById('back-btn');
     backBtn.style.display = (currentQuestionIndex === 0) ? 'none' : 'inline-block';
 
-    // Update Progress
     document.getElementById('progress-bar').style.width = `${(currentQuestionIndex / questions.length) * 100}%`;
 
     getWeightedAnswers(q).forEach(ans => {
@@ -223,7 +221,6 @@ function showResult() {
     document.getElementById('result-screen').classList.replace('hidden', 'active');
     document.getElementById('progress-bar').style.width = '100%';
 
-    // Reset Adventure Log view state
     document.getElementById('adventure-log-section').classList.add('hidden');
     document.getElementById('log-toggle-btn').innerText = "View Adventure Log";
 
@@ -235,7 +232,6 @@ function showResult() {
     document.getElementById('result-hybrid-text').innerText = `You are a ${hybridName}`;
     document.getElementById('result-desc').innerText = descriptions[primary];
 
-    // Render Stats
     const stats = document.getElementById('result-stats');
     stats.innerHTML = '';
     sorted.forEach(([type, score]) => {
@@ -247,7 +243,6 @@ function showResult() {
             </div>`;
     });
 
-    // Render Adventure Log content
     const reviewList = document.getElementById('review-list');
     reviewList.innerHTML = '';
     userChoices.forEach(choice => {
@@ -261,7 +256,6 @@ function showResult() {
             </div>`;
     });
 
-    // Reset Share Button
     const shareBtn = document.getElementById('share-btn');
     shareBtn.innerText = "Share Results";
     shareBtn.classList.remove('copied');
@@ -279,15 +273,20 @@ function shareResults() {
     const primary = sorted[0][0], secondary = sorted[1][0];
     const hybridName = jobMatrix[primary][secondary];
     
-    let shareText = `⚔️ My RPG Job: ${hybridName} (${primary}/${secondary})\n\n📊 My Class Spectrum:\n`;
+    // Completely stripped of all special symbols, icons, or emojis
+    let shareText = "RPG Job Analysis: " + hybridName + " (" + primary + "/" + secondary + ")\n\n";
+    shareText += "Class Spectrum Breakdown:\n";
+    
     sorted.forEach(([type, score]) => {
-        shareText += `${type}: ${Math.round((score/questions.length)*100)}%\n`;
+        const pct = Math.round((score / questions.length) * 100);
+        shareText += type + ": " + pct + "%\n";
     });
-    shareText += `\nTest yourself at: ${window.location.href}`;
+    
+    shareText += "\nTest Link: " + window.location.href;
 
     navigator.clipboard.writeText(shareText).then(() => {
         const btn = document.getElementById('share-btn');
-        btn.innerText = "Copied to Clipboard!";
+        btn.innerText = "Copied!";
         btn.classList.add('copied');
     });
 }
