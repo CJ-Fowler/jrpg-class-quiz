@@ -3,50 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JRPG Class Aptitude Test</title>
+    <title>RPG Job Analysis</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <div class="app-container">
-        <header>
-            <h1>Class Aptitude Test</h1>
-            <div class="progress-container">
-                <div class="progress-bar" id="progress-bar"></div>
-            </div>
-        </header>
+    <div class="container">
+        <div class="progress-container">
+            <div id="progress-bar" class="progress-fill"></div>
+        </div>
 
         <div id="start-screen" class="screen active">
-            <p>13 Questions to determine your starting character and eventual destiny.</p>
-            <button class="btn start-btn" onclick="startQuiz()">Begin Quiz</button>
+            <h1>RPG Job Analysis</h1>
+            <p>Answer 13 questions to discover your specialized class and aptitude spectrum.</p>
+            <button class="btn" onclick="startQuiz()">Begin Adventure</button>
         </div>
 
         <div id="quiz-screen" class="screen hidden">
             <h2 id="question-text">Question goes here...</h2>
             <div id="answer-buttons" class="btn-grid"></div>
-            <button id="back-btn" class="btn back-btn" onclick="goBack()" style="margin-top: 20px; border-color: #666;">← Go Back</button>
+            <button id="back-btn" class="btn back-btn" onclick="goBack()">← Go Back</button>
         </div>
 
         <div id="result-screen" class="screen hidden">
-            <h2>Your Aptitude Spectrum:</h2>
-            <h1 id="result-title" class="result-title">Primary / Secondary</h1>
-            <p id="result-hybrid-text" class="hybrid-callout"></p>
+            <h2 id="result-title">Your Class</h2>
+            <p id="result-hybrid-text"></p>
             <p id="result-desc"></p>
             
             <div id="result-stats" class="stats-container"></div>
 
-            <div class="review-section">
-                <h3>Adventure Log (Your Choices)</h3>
-                <div id="review-list"></div>
-            </div>
             <div class="result-actions">
-                 <button class="btn" onclick="restartQuiz()">Restart Adventure</button>
+                <button class="btn" onclick="restartQuiz()">Restart Adventure</button>
                 <button id="share-btn" class="btn share-btn" onclick="shareResults()">Share Results</button>
             </div>
-            <button class="btn" style="text-align:center" onclick="restartQuiz()">Re-Roll Character</button>
+
+            <div class="log-container">
+                <button id="log-toggle-btn" class="btn log-btn" onclick="toggleLog()">View Adventure Log</button>
+                <div id="adventure-log-section" class="hidden">
+                    <h3>Your Journey’s Choices</h3>
+                    <div id="review-list"></div>
+                </div>
+            </div>
         </div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>

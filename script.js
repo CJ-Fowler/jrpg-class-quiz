@@ -187,11 +187,7 @@ function showQuestion() {
     btnContainer.innerHTML = '';
     
     const backBtn = document.getElementById('back-btn');
-    if (currentQuestionIndex === 0) {
-        backBtn.style.display = 'none';
-    } else {
-        backBtn.style.display = 'inline-block';
-    }
+    backBtn.style.display = (currentQuestionIndex === 0) ? 'none' : 'inline-block';
 
     document.getElementById('progress-bar').style.width = `${(currentQuestionIndex / questions.length) * 100}%`;
 
@@ -224,6 +220,8 @@ function showResult() {
     document.getElementById('quiz-screen').classList.replace('active', 'hidden');
     document.getElementById('result-screen').classList.replace('hidden', 'active');
     document.getElementById('progress-bar').style.width = '100%';
+    document.getElementById('adventure-log-section').classList.add('hidden');
+    document.getElementById('log-toggle-btn').innerText = "View Adventure Log";
 
     const sorted = Object.entries(scores).sort((a,b) => b[1] - a[1]);
     const primary = sorted[0][0], secondary = sorted[1][0];
@@ -250,39 +248,30 @@ function showResult() {
         reviewList.innerHTML += `
             <div class="review-item">
                 <div class="review-q">${choice.q}</div>
-                <div class="review-a">
-                    <span>${choice.a}</span>
-                    <span class="class-tag">${choice.type}</span>
-                </div>
-            </div>
-        `;
+                <div class="review-a"><span>${choice.a}</span><span class="class-tag">${choice.type}</span></div>
+            </div>`;
     });
+}
 
-    // Reset share button text
-    const shareBtn = document.getElementById('share-btn');
-    shareBtn.innerText = "Share Results";
-    shareBtn.classList.remove('copied');
+function toggleLog() {
+    const logSection = document.getElementById('adventure-log-section');
+    const toggleBtn = document.getElementById('log-toggle-btn');
+    const isHidden = logSection.classList.toggle('hidden');
+    toggleBtn.innerText = isHidden ? "View Adventure Log" : "Hide Adventure Log";
 }
 
 function shareResults() {
     const sorted = Object.entries(scores).sort((a,b) => b[1] - a[1]);
     const primary = sorted[0][0], secondary = sorted[1][0];
     const hybridName = jobMatrix[primary][secondary];
-    
-    let shareText = `⚔️ My RPG Job Analysis: ${hybridName} (${primary}/${secondary})\n\n`;
-    shareText += `📊 My Class Spectrum:\n`;
-    
-    sorted.forEach(([type, score]) => {
-        const pct = Math.round((score / questions.length) * 100);
-        shareText += `${type}: ${pct}%\n`;
-    });
-    
-    shareText += `\nDiscover your class at: ${window.location.href}`;
+    let shareText = `⚔️ My RPG Job: ${hybridName} (${primary}/${secondary})\n\n📊 Spectrum:\n`;
+    sorted.forEach(([type, score]) => shareText += `${type}: ${Math.round((score/questions.length)*100)}%\n`);
+    shareText += `\nTest yourself: ${window.location.href}`;
 
     navigator.clipboard.writeText(shareText).then(() => {
-        const shareBtn = document.getElementById('share-btn');
-        shareBtn.innerText = "Copied to Clipboard!";
-        shareBtn.classList.add('copied');
+        const btn = document.getElementById('share-btn');
+        btn.innerText = "Copied!";
+        btn.classList.add('copied');
     });
 }
 
